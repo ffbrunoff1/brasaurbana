@@ -184,3 +184,100 @@ export default function ContactPage() {
                 </h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      aria-label={social.label}
+                      className="w-10 h-10 bg-primary-600/20 rounded-full flex items-center justify-center text-primary-400 hover:bg-primary-600 hover:text-white transition-all duration-300 hover:scale-110"
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Form Section */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="bg-dark-700 p-8 rounded-2xl shadow-2xl">
+                <h2 className="text-3xl font-display font-bold mb-6 text-white">
+                  Envie uma Mensagem
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Seu Nome"
+                      required
+                      className="w-full bg-dark-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Seu E-mail"
+                      required
+                      className="w-full bg-dark-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    />
+                  </div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Seu Telefone (Opcional)"
+                    className="w-full bg-dark-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  />
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Assunto"
+                    required
+                    className="w-full bg-dark-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  />
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Sua Mensagem"
+                    rows="5"
+                    required
+                    className="w-full bg-dark-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  ></textarea>
+
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    size="invisible"
+                    sitekey="6LeIxAcpAAAAAM13a_V0-aA4b99_aA4b99_aA4b99" // Chave de teste, substituir pela real
+                    theme="dark"
+                  />
+
+                  {status.message && (
+                    <div className={`p-4 rounded-lg text-center ${status.isError ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'}`}>
+                      {status.message}
+                    </div>
+                  )}
+
+                  <button type="submit" className="btn-primary w-full text-lg py-4 ember-glow">
+                    Enviar Mensagem
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
